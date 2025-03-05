@@ -16,7 +16,7 @@ WORKDIR /app
 RUN mix do local.hex --force, local.rebar --force
 
 # Copy configuration
-# COPY config config
+COPY config config
 
 # Copy mix files
 COPY mix.exs mix.exs
@@ -32,9 +32,8 @@ COPY lib lib
 RUN mix compile
 
 # Copy release configuration and build the release
-# COPY rel rel
-RUN mix release
 COPY rel rel
+RUN mix release
 
 ## Runner image
 
@@ -49,6 +48,7 @@ RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
+ENV ELIXIR_ERL_OPTIONS="-sname protohackers"
 
 WORKDIR /app
 

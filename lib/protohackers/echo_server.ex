@@ -3,12 +3,12 @@ defmodule Protohackers.EchoServer do
 
   require Logger
 
+  defstruct [:listen_socket, :supervisor]
+
   @spec start_link(keyword()) :: GenServer.on_start()
   def start_link(opts) do
     GenServer.start_link(__MODULE__, opts)
   end
-
-  defstruct [:listen_socket, :supervisor]
 
   @impl true
   def init(opts) do
