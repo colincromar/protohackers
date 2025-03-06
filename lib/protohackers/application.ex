@@ -7,7 +7,8 @@ defmodule Protohackers.Application do
   def start(_type, _args) do
     children = [
       {Protohackers.EchoServer, port: 4000},
-      {Protohackers.PrimeServer, port: 5002}
+      {Protohackers.PrimeServer, port: 5002},
+      {Protohackers.PricesServer, port: 5003}
     ]
 
     opts = [strategy: :one_for_one, name: Protohackers.Supervisor]
